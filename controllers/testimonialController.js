@@ -1,0 +1,37 @@
+import Testimonial from "../models/Testimonial.js";
+
+// @desc    Get all active testimonials
+// @route   GET /api/testimonials
+export const getTestimonials = async(req, res) => {
+    try {
+        // Sirf active reviews uthayenge aur order wise sort karenge
+        const reviews = await Testimonial.find({ isActive: true }).sort({ order: 1, createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: reviews.length,
+            data: reviews
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+};
+
+// @desc    Create/Update Testimonial (Admin Only)
+export const upsertTestimonial = async(req, res) => {
+    try {
+        const { id, name, role, body, rating, order } = req.body;
+
+        const testimonialData = { name, role, body, rating, order };
+
+        if (id) {
+            const updated = await Testimonial.findByIdAndUpdate(id, testimonialData, { new: true });
+            return res.status(200).json({ success: true, data: updated });
+        }
+
+        const created = await Testimonial.create(testimonialData);
+        res.status(201).json({ success: true, data: created });
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message });
+    }
+};
