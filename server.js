@@ -57,13 +57,13 @@ app.set("trust proxy", 1);
 
 app.use(helmet());
 
-app.use(
-    cors({
-        origin: process.env.CLIENT_URL || "http://localhost:3000",
-        credentials: true,
-    })
-);
-
+app.use(cors({
+    origin: [
+        "http://localhost:3000",
+        "https://yuganter-frontend.vercel.app"
+    ],
+    credentials: true,
+}));
 app.use(compression());
 app.use(mongoSanitize());
 
