@@ -3,12 +3,12 @@ import Service from "../models/Service.js";
 import Blog from "../models/Blog.js";
 import Attendance from "../models/Attendance.js";
 import CourseHighlight from "../models/CourseHighlights.js";
-/* =========================
-   DASHBOARD ANALYTICS
-   GET /api/analytics/stats
-========================= */
+
+// DASHBOARD ANALYTICS
+
 export const getDashboardStats = async(req, res) => {
     try {
+        // Run all database count queries in parallel (faster performance)
         const [
             students,
             services,

@@ -1,8 +1,6 @@
 import CourseHighlight from "../models/CourseHighlights.js";
 
-/* =========================================================
-   GET COURSES (POPULAR OR ALL)
-========================================================= */
+//GET COURSES (POPULAR OR ALL)
 export const getCourseHighlights = async(req, res) => {
     try {
         const { all } = req.query;
@@ -34,9 +32,8 @@ export const getCourseHighlights = async(req, res) => {
     }
 };
 
-/* =========================================================
-   GET SINGLE COURSE BY SLUG
-========================================================= */
+
+//GET SINGLE COURSE BY SLUG
 export const getCourseBySlug = async(req, res) => {
     try {
         const course = await CourseHighlight.findOne({
@@ -64,9 +61,8 @@ export const getCourseBySlug = async(req, res) => {
     }
 };
 
-/* =========================================================
-   UPSERT COURSE (CREATE / UPDATE) 🔥 FULL FIX
-========================================================= */
+
+//  UPSERT COURSE (CREATE / UPDATE) FULL FIX
 export const upsertCourseHighlight = async(req, res) => {
     try {
         const {
@@ -78,7 +74,7 @@ export const upsertCourseHighlight = async(req, res) => {
             duration,
             isPopular,
 
-            // 🔥 IMPORTANT (ALL EXTRA FIELDS)
+            // IMPORTANT (ALL EXTRA FIELDS)
             bgImage,
             subtitle,
             stats,
@@ -113,7 +109,7 @@ export const upsertCourseHighlight = async(req, res) => {
         let savedCourse;
 
         if (existing) {
-            // 🔥 UPDATE ALL FIELDS
+            //  UPDATE ALL FIELDS
             savedCourse = await CourseHighlight.findOneAndUpdate({ slug }, {
                 title,
                 slug,
@@ -133,7 +129,7 @@ export const upsertCourseHighlight = async(req, res) => {
                 prerequisites,
             }, { new: true, runValidators: true });
         } else {
-            // 🔥 CREATE WITH FULL DATA
+            //  CREATE WITH FULL DATA
             savedCourse = await CourseHighlight.create({
                 title,
                 slug,
@@ -171,7 +167,7 @@ export const upsertCourseHighlight = async(req, res) => {
 
 
 
-/* UPDATE COURSE */
+//UPDATE COURSE
 export const updateCourseHighlight = async(req, res) => {
     try {
         const updatedCourse =
@@ -207,9 +203,8 @@ export const updateCourseHighlight = async(req, res) => {
 };
 
 
-/* =========================================================
-   DELETE COURSE
-========================================================= */
+
+//DELETE COURSE
 export const deleteCourseHighlight = async(req, res) => {
     try {
         const deleted = await CourseHighlight.findByIdAndDelete(req.params.id);

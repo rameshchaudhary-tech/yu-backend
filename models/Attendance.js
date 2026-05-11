@@ -7,8 +7,10 @@ const attendanceSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now }
 }, { timestamps: true });
 
-// 🚀 SPEED & SECURITY: Ek student ek timestamp par dobara scan nahi kar payega
+// Prevent duplicate QR scans for same student and timestamp
 attendanceSchema.index({ studentId: 1, qrTimestamp: 1 }, { unique: true });
+
+// Fast sorting by latest date
 attendanceSchema.index({ date: -1 });
 
 export default mongoose.models.Attendance || mongoose.model("Attendance", attendanceSchema);

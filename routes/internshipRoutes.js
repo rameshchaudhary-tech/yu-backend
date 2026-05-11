@@ -16,7 +16,6 @@ const applyLimiter = rateLimit({
     message: { message: "Too many applications, please try again later." }
 });
 
-// ✅ NEW: base route bhi kaam karega
 router.get("/", getInternshipPositions);
 
 // Admin: create internship

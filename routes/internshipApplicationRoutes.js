@@ -1,4 +1,3 @@
-// routes/internshipRoutes.js
 
 import express from "express";
 import rateLimit from "express-rate-limit";
@@ -16,9 +15,7 @@ import {
 
 const router = express.Router();
 
-/* =========================
-   RATE LIMITER
-========================= */
+ //  RATE LIMITER
 const applyLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 Hour
     max: 10,

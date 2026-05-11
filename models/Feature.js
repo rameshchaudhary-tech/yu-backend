@@ -30,5 +30,4 @@ const featureSchema = new mongoose.Schema({
     }]
 }, { timestamps: true });
 
-// CRITICAL: You must export the model as 'default'
 export default mongoose.model("Feature", featureSchema);

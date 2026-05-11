@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 
 const router = express.Router();
 
-// 🚫 Rate Limiter: Ek IP se 15 min mein 50 requests max
+// RATE LIMIT 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 50,

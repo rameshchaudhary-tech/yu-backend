@@ -27,7 +27,7 @@ const studentSchema = new mongoose.Schema({
 
     status: { type: String, default: "Pending" },
 
-    qrCode: { type: String }, // ✅ QR STORE
+    qrCode: { type: String },
 }, { timestamps: true });
 
 const Student = mongoose.model("Student", studentSchema);

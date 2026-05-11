@@ -9,7 +9,6 @@ const servicesHeroSchema = new mongoose.Schema({
     heroImage: { type: String, required: true }
 }, { timestamps: true });
 
-// ⚡ SPEED: Database level par indexing
 servicesHeroSchema.index({ createdAt: -1 });
 
 export default mongoose.models.ServicesHero || mongoose.model("ServicesHero", servicesHeroSchema);

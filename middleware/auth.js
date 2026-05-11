@@ -1,8 +1,6 @@
 import jwt from "jsonwebtoken";
 
-/* =========================
-   VERIFY TOKEN MIDDLEWARE
-========================= */
+//  VERIFY TOKEN MIDDLEWARE
 export const verifyToken = (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
@@ -28,9 +26,7 @@ export const verifyToken = (req, res, next) => {
     }
 };
 
-/* =========================
-   ADMIN CHECK MIDDLEWARE
-========================= */
+//   ADMIN CHECK MIDDLEWARE
 export const isAdmin = (req, res, next) => {
     try {
         if (!req.user) {

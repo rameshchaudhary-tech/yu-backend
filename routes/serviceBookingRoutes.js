@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-/* ================= RATE LIMIT ================= */
+// RATE LIMIT 
 const bookingLimiter = rateLimit({
     windowMs: 30 * 60 * 1000,
     max: 5,
@@ -21,12 +21,12 @@ const bookingLimiter = rateLimit({
     }
 });
 
-/* ================= ADMIN ONLY ================= */
+// ADMIN ONLY 
 router.get("/", verifyToken, isAdmin, getServiceBookings);
 router.delete("/:id", verifyToken, isAdmin, deleteServiceBooking);
 
-/* ================= PUBLIC BOOKING ================= */
+// PUBLIC BOOKING 
 router.post("/", bookingLimiter, createServiceBooking);
 
-/* ================= EXPORT ================= */
+// EXPORT 
 export default router;

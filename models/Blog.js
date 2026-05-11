@@ -9,6 +9,5 @@ const blogSchema = new mongoose.Schema({
     color: { type: String, default: "from-blue-500 to-cyan-400" }
 }, { timestamps: true });
 
-// ✅ FIX: Export default hona chahiye
 const Blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);
 export default Blog;

@@ -11,6 +11,6 @@ const blogLimiter = rateLimit({
 });
 
 router.get("/", blogLimiter, getAllBlogs);
-router.post("/", createBlog); // Note: Production mein isAdmin middleware zaroor lagayein
+router.post("/", createBlog);
 
 export default router;

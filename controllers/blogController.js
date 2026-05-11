@@ -1,7 +1,7 @@
 import Blog from "../models/Blog.js";
 import mongoSanitize from "express-mongo-sanitize";
 
-// ⏱️ Utility function to calculate reading time
+// Utility function to calculate reading time
 const calculateReadTime = (text) => {
     const wordsPerMinute = 200; // Average speed
     const words = text.trim().split(/\s+/).length;
@@ -14,16 +14,16 @@ export const createBlog = async(req, res) => {
         const sanitizedBody = mongoSanitize.sanitize(req.body);
         const { title, description, category, slug, color } = sanitizedBody;
 
-        // ✅ Automated & Real-time Calculation
+        // Automated & Real-time Calculation
         const autoReadTime = calculateReadTime(description);
-
+        // create and save blog in database
         const newBlog = await Blog.create({
             title,
             description,
             category,
             slug,
             color,
-            readTime: autoReadTime // Automatic value save hogi
+            readTime: autoReadTime
         });
 
         res.status(201).json({ success: true, data: newBlog });

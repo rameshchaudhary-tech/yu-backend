@@ -1,13 +1,9 @@
 import CtaData from "../models/CtaData.js";
 
-/**
- * @desc    Get CTA Section Content
- * @route   GET /api/cta
- * @access  Public
- */
+
 export const getCtaContent = async(req, res) => {
     try {
-        // Sirf active content uthayenge aur sabse latest wala
+        // Fetch only active content and the latest one 
         const cta = await CtaData.findOne({ isActive: true }).sort({ createdAt: -1 });
 
         if (!cta) {
@@ -30,11 +26,7 @@ export const getCtaContent = async(req, res) => {
     }
 };
 
-/**
- * @desc    Create or Update CTA Content
- * @route   POST /api/cta/upsert
- * @access  Private (Admin Only recommendation)
- */
+
 export const upsertCtaContent = async(req, res) => {
     try {
         const {
@@ -46,7 +38,6 @@ export const upsertCtaContent = async(req, res) => {
             isActive
         } = req.body;
 
-        // Validation: Basic check taaki empty data save na ho
         if (!heading || !subheading) {
             return res.status(400).json({
                 success: false,
@@ -54,8 +45,8 @@ export const upsertCtaContent = async(req, res) => {
             });
         }
 
-        // Upsert Logic: Ek hi document maintain karne ke liye {} use kiya hai
-        // Agar aapko multiple CTA chahiye toh aap ID check laga sakte hain
+        // Upsert logic: ensures only one document is maintained in the collection using {}
+        // If you want multiple CTA entries, you can use an ID-based check instead
         const updatedCta = await CtaData.findOneAndUpdate({}, {
             heading,
             highlightedText,

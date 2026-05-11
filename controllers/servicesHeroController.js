@@ -1,8 +1,8 @@
 import ServicesHero from "../models/ServicesHero.js";
 import mongoSanitize from "express-mongo-sanitize";
 
-// @desc    Get Services Hero Data (Public)
-// @route   GET /api/services-hero
+//  Get Services Hero Data (Public)
+
 export const getServicesHero = async(req, res) => {
     try {
         // ⚡ SPEED: Fetch plain JSON, bypassing Mongoose overhead
@@ -18,8 +18,8 @@ export const getServicesHero = async(req, res) => {
     }
 };
 
-// @desc    Create or Update Services Hero (Admin Only)
-// @route   POST /api/services-hero/upsert
+//  Create or Update Services Hero (Admin Only)
+
 export const upsertServicesHero = async(req, res) => {
     try {
         // 🛡️ SECURITY: Prevent NoSQL Injection attacks

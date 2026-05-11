@@ -2,9 +2,8 @@ import Attendance from "../models/Attendance.js";
 import Student from "../models/Student.js";
 import mongoSanitize from "express-mongo-sanitize";
 
-/* =========================
-   MARK ATTENDANCE
-========================= */
+// MARK ATTENDANCE
+
 export const markAttendance = async(req, res) => {
     try {
         const sanitizedBody = mongoSanitize.sanitize(req.body);
@@ -18,9 +17,9 @@ export const markAttendance = async(req, res) => {
             });
         }
 
-        /* =========================
-           STUDENT CHECK
-        ========================= */
+
+        //  STUDENT CHECK
+
         const isRegistered = await Student.findOne({
             $or: [
                 { email: studentId },
@@ -35,9 +34,9 @@ export const markAttendance = async(req, res) => {
             });
         }
 
-        /* =========================
-           SAVE ATTENDANCE
-        ========================= */
+
+        // SAVE ATTENDANCE
+
         const newRecord = await Attendance.create({
             studentName,
             studentId,
@@ -67,9 +66,9 @@ export const markAttendance = async(req, res) => {
     }
 };
 
-/* =========================
-   GET ALL ATTENDANCE
-========================= */
+
+// GET ALL ATTENDANCE
+
 export const getAllAttendance = async(req, res) => {
     try {
         const records = await Attendance.find()

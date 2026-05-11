@@ -54,9 +54,8 @@ const courseHighlightSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-/* ✅ INDEX (ONLY WHAT NEEDED) */
+// filtering for popular courses
 courseHighlightSchema.index({ isPopular: 1 });
 
-/* ✅ SAFE EXPORT (no duplicate model error) */
 export default mongoose.models.CourseHighlight ||
     mongoose.model("CourseHighlight", courseHighlightSchema);

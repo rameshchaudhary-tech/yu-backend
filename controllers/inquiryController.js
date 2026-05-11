@@ -1,9 +1,7 @@
 import Inquiry from "../models/Inquiry.js";
 import nodemailer from "nodemailer";
 
-/* =========================
-   CREATE INQUIRY
-========================= */
+// CREATE INQUIRY
 export const createInquiry = async(req, res) => {
     try {
         const { name, email, phone, course } = req.body;
@@ -65,9 +63,7 @@ export const createInquiry = async(req, res) => {
     }
 };
 
-/* =========================
-   GET ALL INQUIRIES (FIXED)
-========================= */
+//   GET ALL INQUIRIES (FIXED)
 export const getAllInquiries = async(req, res) => {
     try {
         const data = await Inquiry.find().sort({ createdAt: -1 });
@@ -85,9 +81,7 @@ export const getAllInquiries = async(req, res) => {
     }
 };
 
-/* =========================
-   DELETE INQUIRY
-========================= */
+//  DELETE INQUIRY
 export const deleteInquiry = async(req, res) => {
     try {
         await Inquiry.findByIdAndDelete(req.params.id);

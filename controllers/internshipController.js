@@ -3,7 +3,7 @@ import InternshipApplication from "../models/InternshipApplication.js";
 import nodemailer from "nodemailer";
 import mongoSanitize from "express-mongo-sanitize";
 
-// ✅ 1. Admin: Data Insert karne ke liye (Postman ke liye)
+// Admin: used to insert data
 export const createInternshipPosition = async(req, res) => {
     try {
         const sanitizedBody = mongoSanitize.sanitize(req.body);
@@ -15,7 +15,7 @@ export const createInternshipPosition = async(req, res) => {
     }
 };
 
-// ✅ 2. Student: Application bhejane ke liye (React/Frontend ke liye)
+// Student: used to submit application 
 export const submitInternshipApplication = async(req, res) => {
     try {
         const sanitizedBody = mongoSanitize.sanitize(req.body);
@@ -70,7 +70,7 @@ export const submitInternshipApplication = async(req, res) => {
     }
 };
 
-// ✅ 3. Admin: Dashboard ke liye saari applications fetch karna
+// Admin: used to fetch all applications
 export const getInternships = async(req, res) => {
     try {
         const applications = await InternshipApplication.find().sort({ createdAt: -1 }).lean();
@@ -80,7 +80,7 @@ export const getInternships = async(req, res) => {
     }
 };
 
-// ✅ 4. Public: Frontend par Internship Programs (Cards) fetch karne ke liye
+// Public: used to fetch all internship positions
 export const getInternshipPositions = async(req, res) => {
     try {
         const positions = await Internship.find().sort({ createdAt: -1 }).lean();

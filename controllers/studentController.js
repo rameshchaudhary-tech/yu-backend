@@ -4,9 +4,7 @@ import Student from "../models/Student.js";
 import mongoSanitize from "express-mongo-sanitize";
 import QRCode from "qrcode";
 
-/* =========================
-   REGISTER STUDENT
-========================= */
+//REGISTER STUDENT
 export const registerStudent = async(req, res) => {
     try {
         // SANITIZE BODY
@@ -25,9 +23,7 @@ export const registerStudent = async(req, res) => {
             });
         }
 
-        /* =========================
-           CREATE STUDENT
-        ========================= */
+        //   CREATE STUDENT
         const newStudent = await Student.create({
             ...sanitizedBody,
             name: sanitizedBody.name.trim(),
@@ -35,9 +31,8 @@ export const registerStudent = async(req, res) => {
             mobile: sanitizedBody.mobile.trim(),
         });
 
-        /* =========================
-           QR DATA
-        ========================= */
+
+        //  QR DATA
         const qrData = JSON.stringify({
             studentId: newStudent._id,
             name: newStudent.name,
@@ -46,21 +41,18 @@ export const registerStudent = async(req, res) => {
             course: newStudent.course,
         });
 
-        /* =========================
-           GENERATE QR CODE
-        ========================= */
+        //   GENERATE QR CODE
         const qrCodeImage = await QRCode.toDataURL(qrData);
 
-        /* =========================
-           SAVE QR CODE
-        ========================= */
+
+        //   SAVE QR CODE
+
         newStudent.qrCode = qrCodeImage;
 
         await newStudent.save();
 
-        /* =========================
-           RESPONSE
-        ========================= */
+
+        //   RESPONSE
         res.status(201).json({
             success: true,
             message: "Registration Successful!",
@@ -72,9 +64,8 @@ export const registerStudent = async(req, res) => {
     } catch (error) {
         console.log("❌ REGISTER STUDENT ERROR:", error);
 
-        /* =========================
-           DUPLICATE KEY ERROR
-        ========================= */
+
+        //   DUPLICATE KEY ERROR
         if (error.code === 11000) {
             const field = Object.keys(error.keyValue)[0];
 
@@ -84,9 +75,7 @@ export const registerStudent = async(req, res) => {
             });
         }
 
-        /* =========================
-           SERVER ERROR
-        ========================= */
+        //   SERVER ERROR
         res.status(500).json({
             success: false,
             message: error.message || "Server Error",
@@ -94,9 +83,7 @@ export const registerStudent = async(req, res) => {
     }
 };
 
-/* =========================
-   GET ALL STUDENTS
-========================= */
+//   GET ALL STUDENTS
 export const getAllStudents = async(req, res) => {
     try {
         const students = await Student.find().sort({
@@ -119,9 +106,7 @@ export const getAllStudents = async(req, res) => {
     }
 };
 
-/* =========================
-   GET SINGLE STUDENT
-========================= */
+//   GET SINGLE STUDENT
 export const getStudentById = async(req, res) => {
     try {
         const { id } = req.params;
@@ -150,9 +135,7 @@ export const getStudentById = async(req, res) => {
     }
 };
 
-/* =========================
-   UPDATE STUDENT
-========================= */
+//   UPDATE STUDENT
 export const updateStudent = async(req, res) => {
     try {
         const { id } = req.params;
@@ -190,9 +173,7 @@ export const updateStudent = async(req, res) => {
     }
 };
 
-/* =========================
-   DELETE STUDENT
-========================= */
+//   DELETE STUDENT
 export const deleteStudent = async(req, res) => {
     try {
         const { id } = req.params;

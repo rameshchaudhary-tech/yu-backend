@@ -6,32 +6,26 @@ import { verifyToken, isAdmin } from "../middleware/auth.js";
 
 const router = express.Router();
 
-/* =========================
-   RATE LIMIT (ANTI SPAM)
-========================= */
+//   RATE LIMIT (ANTI SPAM)
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    success: false,
-    message: "Too many requests, try again later",
-  },
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: {
+        success: false,
+        message: "Too many requests, try again later",
+    },
 });
 
-/* =========================
-   PUBLIC ROUTE
-========================= */
+//   PUBLIC ROUTE
 router.get("/", apiLimiter, getHeroData);
 
-/* =========================
-   ADMIN PROTECTED ROUTE
-========================= */
+//   ADMIN PROTECTED ROUTE
 router.put(
-  "/update",
-  verifyToken, // JWT check
-  isAdmin, // role check
-  apiLimiter,
-  updateHeroData
+    "/update",
+    verifyToken, // JWT check
+    isAdmin, // role check
+    apiLimiter,
+    updateHeroData
 );
 
 export default router;

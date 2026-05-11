@@ -4,12 +4,10 @@ import InternshipApplication from "../models/InternshipApplication.js";
 import nodemailer from "nodemailer";
 import mongoSanitize from "express-mongo-sanitize";
 
-/* =========================
-   APPLY FOR INTERNSHIP
-========================= */
+//  APPLY FOR INTERNSHIP
 export const applyForInternship = async(req, res) => {
     try {
-        // ✅ SANITIZE BODY
+        // SANITIZE BODY
         const sanitizedBody = mongoSanitize.sanitize(req.body);
 
         const {
@@ -21,9 +19,7 @@ export const applyForInternship = async(req, res) => {
             message,
         } = sanitizedBody;
 
-        /* =========================
-           VALIDATION
-        ========================= */
+        //   VALIDATION
         if (!fullName ||
             !email ||
             !phone ||
@@ -36,9 +32,7 @@ export const applyForInternship = async(req, res) => {
             });
         }
 
-        /* =========================
-           SAVE TO DATABASE
-        ========================= */
+        //   SAVE TO DATABASE
         const application = await InternshipApplication.create({
             fullName: fullName.trim(),
             email: email.toLowerCase().trim(),
@@ -48,18 +42,14 @@ export const applyForInternship = async(req, res) => {
             message: message ? .trim() || "",
         });
 
-        /* =========================
-           SEND RESPONSE FAST
-        ========================= */
+        //   SEND RESPONSE FAST
         res.status(201).json({
             success: true,
             message: "Application submitted successfully! Our team will contact you soon.",
             data: application,
         });
 
-        /* =========================
-           EMAIL TRANSPORTER
-        ========================= */
+        //   EMAIL TRANSPORTER
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
@@ -68,9 +58,7 @@ export const applyForInternship = async(req, res) => {
             },
         });
 
-        /* =========================
-           EMAIL TEMPLATE
-        ========================= */
+        //   EMAIL TEMPLATE
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: process.env.ADMIN_EMAIL,
@@ -125,9 +113,7 @@ export const applyForInternship = async(req, res) => {
       `,
         };
 
-        /* =========================
-           SEND EMAIL IN BACKGROUND
-        ========================= */
+        //   SEND EMAIL IN BACKGROUND
         transporter.sendMail(mailOptions, (error) => {
             if (error) {
                 console.error(
@@ -136,7 +122,7 @@ export const applyForInternship = async(req, res) => {
                 );
             } else {
                 console.log(
-                    "✅ Internship Application Email Sent"
+                    " Internship Application Email Sent"
                 );
             }
         });
@@ -154,9 +140,7 @@ export const applyForInternship = async(req, res) => {
     }
 };
 
-/* =========================
-   GET ALL APPLICATIONS
-========================= */
+// GET ALL APPLICATIONS
 export const getInternshipApplications = async(
     req,
     res
@@ -186,9 +170,7 @@ export const getInternshipApplications = async(
     }
 };
 
-/* =========================
-   DELETE APPLICATION
-========================= */
+//   DELETE APPLICATION
 export const deleteInternshipApplication =
     async(req, res) => {
         try {

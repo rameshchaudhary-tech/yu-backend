@@ -4,10 +4,8 @@ import { getDashboardStats } from "../controllers/analyticsController.js";
 
 const router = express.Router();
 
-/* =========================
-   ADMIN DASHBOARD STATS
-   GET /api/analytics/stats
-========================= */
+// ADMIN DASHBOARD STATS
+
 router.get("/stats", verifyToken, isAdmin, getDashboardStats);
 
 export default router;

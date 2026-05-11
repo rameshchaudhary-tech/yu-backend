@@ -17,11 +17,11 @@ const limiter = rateLimit({
     max: 100,
 });
 
-/* PUBLIC */
+// PUBLIC ROUTES
 router.get("/", limiter, getCourseHighlights);
 router.get("/detail/:slug", limiter, getCourseBySlug);
 
-/* ADMIN */
+// ADMIN ROUTES
 router.post(
     "/upsert",
     verifyToken,

@@ -7,9 +7,7 @@ import {
 
 const router = express.Router();
 
-/* =========================
-   RATE LIMIT (QR SCAN PROTECTION)
-========================= */
+//  RATE LIMIT (QR SCAN PROTECTION)
 const scanLimiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
     max: 10, // max 10 requests per minute
@@ -18,10 +16,6 @@ const scanLimiter = rateLimit({
         message: "Too many scan attempts! Please try again later."
     }
 });
-
-/* =========================
-   ROUTES
-========================= */
 
 // MARK ATTENDANCE (QR SCAN)
 router.post("/create", scanLimiter, markAttendance);

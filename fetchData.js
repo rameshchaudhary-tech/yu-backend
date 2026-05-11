@@ -5,7 +5,7 @@ const MONGO_URI =
 
 await mongoose.connect(MONGO_URI);
 
-console.log("✅ Connected to MongoDB");
+console.log("Connected to MongoDB");
 
 const collections = [
     "abouts",
@@ -33,7 +33,7 @@ const collections = [
     "users"
 ];
 
-// model cache (important fix)
+// model cache 
 const models = {};
 
 function getModel(name) {
@@ -64,18 +64,18 @@ async function transferAll() {
                 continue;
             }
 
-            // 🔥 IMPORTANT FIX: remove duplicates first
+            // IMPORTANT FIX: remove duplicates first
             await Target.deleteMany({});
 
             await Target.insertMany(data);
 
-            console.log(`✅ ${col} transferred (${data.length} docs)`);
+            console.log(`${col} transferred (${data.length} docs)`);
         } catch (err) {
-            console.log(`❌ Error in ${col}:`, err.message);
+            console.log(`Error in ${col}:`, err.message);
         }
     }
 
-    console.log("🚀 ALL DATA TRANSFER COMPLETE");
+    console.log(" ALL DATA TRANSFER COMPLETE");
     process.exit();
 }
 

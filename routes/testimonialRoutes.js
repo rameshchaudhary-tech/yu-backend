@@ -6,9 +6,8 @@ const router = express.Router();
 // GET all testimonials
 router.get("/", getTestimonials);
 
-// POST create or update testimonial
-// Future mein yahan 'protect' aur 'admin' middleware add kar sakte hain
+// POST: Create or update testimonial
+// In the future, 'protect' and 'admin' middleware can be added here
 router.post("/upsert", upsertTestimonial);
 
-// ✅ Default export add kiya taaki server.js ise recognize kar sake
 export default router;

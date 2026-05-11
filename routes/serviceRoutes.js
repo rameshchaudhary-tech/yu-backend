@@ -13,24 +13,24 @@ import { verifyToken, isAdmin } from "../middleware/auth.js";
 
 const router = express.Router();
 
-/* ================= RATE LIMIT ================= */
+// RATE LIMIT 
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
     message: "Too many requests, please try again later."
 });
 
-/* ================= PUBLIC ================= */
+// PUBLIC 
 router.get("/", apiLimiter, getServices);
 
-/* ================= ADMIN CRUD ================= */
+// ADMIN CRUD 
 router.post("/", verifyToken, isAdmin, createService);
 
 router.put("/:id", verifyToken, isAdmin, updateService);
 
 router.delete("/:id", verifyToken, isAdmin, deleteService);
 
-/* ================= UPSERT (DO NOT TOUCH) ================= */
+// UPSERT (DO NOT TOUCH) 
 router.post("/upsert", verifyToken, isAdmin, upsertService);
 
 export default router;

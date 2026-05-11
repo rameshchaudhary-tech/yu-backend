@@ -1,9 +1,6 @@
 import Feature from "../models/Feature.js";
 
-/**
- * Get Feature Section Data
- * Public Route | Fast Read with lean()
- */
+// Get Feature Section Data
 export const getFeatures = async(req, res) => {
     try {
         const data = await Feature.findOne().lean();
@@ -16,10 +13,7 @@ export const getFeatures = async(req, res) => {
     }
 };
 
-/**
- * Update or Insert Feature Data
- * Admin Only | Secure Atomic Update
- */
+// Update or Insert Feature Data
 export const updateFeatures = async(req, res) => {
     try {
         const { mainHeading, highlightedText, featuresList } = req.body;

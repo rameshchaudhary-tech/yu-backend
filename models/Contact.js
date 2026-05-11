@@ -8,5 +8,4 @@ const contactSchema = new mongoose.Schema({
     status: { type: String, default: "Unread" }
 }, { timestamps: true });
 
-// ✅ Naam 'Inquiry' se badal kar 'Contact' kar diya gaya hai
 export default mongoose.models.Contact || mongoose.model("Contact", contactSchema);

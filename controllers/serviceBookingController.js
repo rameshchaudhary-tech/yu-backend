@@ -1,9 +1,7 @@
 import ServiceBooking from "../models/ServiceBooking.js";
 import { transporter } from "../utils/mailer.js";
 
-/* =========================
-   CREATE SERVICE BOOKING
-========================= */
+//   CREATE SERVICE BOOKING
 export const createServiceBooking = async(req, res) => {
     try {
         const { name, email, phone, service, message } = req.body;
@@ -54,9 +52,7 @@ export const createServiceBooking = async(req, res) => {
     }
 };
 
-/* =========================
-   GET ALL SERVICE BOOKINGS
-========================= */
+//   GET ALL SERVICE BOOKINGS
 export const getServiceBookings = async(req, res) => {
     try {
         const bookings = await ServiceBooking.find()
@@ -77,9 +73,7 @@ export const getServiceBookings = async(req, res) => {
     }
 };
 
-/* =========================
-   DELETE SERVICE BOOKING
-========================= */
+//   DELETE SERVICE BOOKING
 export const deleteServiceBooking = async(req, res) => {
     try {
         const { id } = req.params;

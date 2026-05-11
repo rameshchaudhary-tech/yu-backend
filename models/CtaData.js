@@ -26,5 +26,4 @@ const ctaSchema = new mongoose.Schema({
     isActive: { type: Boolean, default: true }
 }, { timestamps: true });
 
-// ✅ Yeh line add karein (Error yahan se solve hoga)
 export default mongoose.model("CtaData", ctaSchema);

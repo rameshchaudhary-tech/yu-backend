@@ -41,7 +41,7 @@ export const createService = async(req, res) => {
     }
 };
 
-/* ================= UPDATE (FIXED IMPORTANT) ================= */
+/* ================= UPDATE ================= */
 export const updateService = async(req, res) => {
     try {
         const { id } = req.params;
@@ -94,7 +94,7 @@ export const deleteService = async(req, res) => {
     }
 };
 
-/* ================= UPSERT (UNCHANGED) ================= */
+/* ================= UPSERT ================= */
 export const upsertService = async(req, res) => {
     try {
         const { title, description, icon, popular, features, slug } = req.body;

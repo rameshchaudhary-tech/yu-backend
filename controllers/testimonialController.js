@@ -1,10 +1,9 @@
 import Testimonial from "../models/Testimonial.js";
 
-// @desc    Get all active testimonials
-// @route   GET /api/testimonials
+// Get all active testimonials
 export const getTestimonials = async(req, res) => {
     try {
-        // Sirf active reviews uthayenge aur order wise sort karenge
+        // Get active reviews and sort them by order and createdAt
         const reviews = await Testimonial.find({ isActive: true }).sort({ order: 1, createdAt: -1 });
 
         res.status(200).json({
@@ -17,7 +16,7 @@ export const getTestimonials = async(req, res) => {
     }
 };
 
-// @desc    Create/Update Testimonial (Admin Only)
+// Create/Update Testimonial 
 export const upsertTestimonial = async(req, res) => {
     try {
         const { id, name, role, body, rating, order } = req.body;

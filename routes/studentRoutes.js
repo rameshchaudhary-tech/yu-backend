@@ -13,9 +13,7 @@ import {
 
 const router = express.Router();
 
-/* =========================
-   RATE LIMITER
-========================= */
+// RATE LIMITER
 const registerLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
     max: 30,
@@ -27,9 +25,7 @@ const registerLimiter = rateLimit({
     legacyHeaders: false,
 });
 
-/* =========================
-   ROUTES
-========================= */
+// ROUTES
 
 // REGISTER STUDENT
 // POST /api/students
